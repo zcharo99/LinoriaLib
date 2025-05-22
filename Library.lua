@@ -306,7 +306,7 @@ function Library:MapValue(Value, MinA, MaxA, MinB, MaxB)
 end;
 
 function Library:GetTextBounds(Text, FontFace, Size, Resolution)
-	local Bounds = TextService:GetTextSize(Text, Size, Enum.Font.Unknown, Resolution or Vector2.new(1920, 1080), FontFace)
+	local Bounds = TextService:GetTextSize(Text, Size, Enum.Font.Code, Resolution or Vector2.new(1920, 1080))
 	return Bounds.X, Bounds.Y
 end;
 
