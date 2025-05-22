@@ -305,9 +305,9 @@ function Library:MapValue(Value, MinA, MaxA, MinB, MaxB)
     return (1 - ((Value - MinA) / (MaxA - MinA))) * MinB + ((Value - MinA) / (MaxA - MinA)) * MaxB;
 end;
 
-function Library:GetTextBounds(Text, Font, Size, Resolution)
-    local Bounds = TextService:GetTextSize(Text, Size, Font, Resolution or Vector2.new(1920, 1080))
-    return Bounds.X, Bounds.Y
+function Library:GetTextBounds(Text, FontFace, Size, Resolution)
+	local Bounds = TextService:GetTextSize(Text, Size, Enum.Font.Unknown, Resolution or Vector2.new(1920, 1080), FontFace)
+	return Bounds.X, Bounds.Y
 end;
 
 function Library:GetDarkerColor(Color)
