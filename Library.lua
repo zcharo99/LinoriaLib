@@ -172,7 +172,7 @@ function Library:MakeDraggable(Instance, Cutoff)
                 Mouse.Y - Instance.AbsolutePosition.Y
             );
 
-            if ObjPos.Y > (Cutoff or 25) then
+            if ObjPos.Y > (Cutoff or 1) then
                 return;
             end;
 
