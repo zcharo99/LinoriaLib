@@ -2971,7 +2971,7 @@ function Library:CreateWindow(...)
         Parent = ScreenGui;
     });
 
-    Library:MakeDraggable(Outer);
+    Library:MakeDraggable(Outer, 0);
 
     local Inner = Library:Create('Frame', {
         BackgroundColor3 = Library.MainColor;
