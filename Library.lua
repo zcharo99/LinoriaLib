@@ -176,14 +176,13 @@ function Library:MakeDraggable(Instance, Cutoff)
             if ObjPos.Y > (Cutoff or 40) then
                 return;
             end;
-
-	    local inset = GuiService:GetGuiInset()
-	    local mousePos = Vector2.new(
-		Mouse.X - inset.X,
-		Mouse.Y - inset.Y
-	    )
 		
             while InputService:IsMouseButtonPressed(Enum.UserInputType.MouseButton1) do
+		local inset = GuiService:GetGuiInset()
+	    	local mousePos = Vector2.new(
+		    Mouse.X - inset.X,
+		    Mouse.Y - inset.Y
+	    	)
                 Instance.Position = UDim2.new(
                     0,
                     mousePos.X - ObjPos.X + (Instance.Size.X.Offset * Instance.AnchorPoint.X),
