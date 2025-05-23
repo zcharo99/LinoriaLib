@@ -168,11 +168,11 @@ function Library:MakeDraggable(Instance, Cutoff)
     Instance.InputBegan:Connect(function(Input)
         if Input.UserInputType == Enum.UserInputType.MouseButton1 then
             local ObjPos = Vector2.new(
-                Mouse.X + 40 - Instance.AbsolutePosition.X,
-                Mouse.Y + 40 - Instance.AbsolutePosition.Y
+                Mouse.X - Instance.AbsolutePosition.X,
+                Mouse.Y - Instance.AbsolutePosition.Y
             );
 
-            if ObjPos.Y > (Cutoff or 0) then
+            if ObjPos.Y > (Cutoff or 25) then
                 return;
             end;
 
