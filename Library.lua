@@ -18,6 +18,17 @@ ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Global;
 ScreenGui.IgnoreGuiInset = true
 ScreenGui.Parent = CoreGui;
 
+local zconn = ScreenGui.DescendantAdded:Connect(function(obj)
+    for _, v in pairs(obj:GetDescendants()) do
+	if v:IsA("GuiObject") then
+	    v.ZIndex = 10000
+	end
+    end
+    if obj:IsA("GuiObject") then
+	obj.ZIndex = 10000
+    end
+end)
+
 local Toggles = {};
 local Options = {};
 
@@ -385,6 +396,7 @@ function Library:Unload()
     for Idx = #Library.Signals, 1, -1 do
         local Connection = table.remove(Library.Signals, Idx)
         Connection:Disconnect()
+	zconn:Disconnect()
     end
 
      -- Call our unload callback, maybe to undo some hooks etc
