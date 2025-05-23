@@ -1,6 +1,6 @@
 local InputService = game:GetService('UserInputService');
 local TextService = game:GetService('TextService');
-local CoreGui = game.CoreGui;
+local CoreGui = game:GetServidce('CoreGui');
 local Teams = game:GetService('Teams');
 local Players = game:GetService('Players');
 local RunService = game:GetService('RunService')
@@ -16,17 +16,7 @@ ProtectGui(ScreenGui);
 
 ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Global;
 ScreenGui.Parent = gethui();
-
-local zconn = ScreenGui.DescendantAdded:Connect(function(obj)
-    for _, v in pairs(obj:GetDescendants()) do
-	if v:IsA("GuiObject") then
-	    v.ZIndex = 10000
-	end
-    end
-    if obj:IsA("GuiObject") then
-	obj.ZIndex = 10000
-    end
-end)
+ScreenGui.DisplayOrder = 20;
 
 local Toggles = {};
 local Options = {};
@@ -395,7 +385,6 @@ function Library:Unload()
     for Idx = #Library.Signals, 1, -1 do
         local Connection = table.remove(Library.Signals, Idx)
         Connection:Disconnect()
-	zconn:Disconnect()
     end
 
      -- Call our unload callback, maybe to undo some hooks etc
