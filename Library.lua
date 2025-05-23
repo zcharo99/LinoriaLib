@@ -178,6 +178,7 @@ function Library:MakeDraggable(Instance, Cutoff)
             end;
 		
             while InputService:IsMouseButtonPressed(Enum.UserInputType.MouseButton1) do
+		local Mouse = InputService:GetMouseLocation()
 		local inset = GuiService:GetGuiInset()
 	    	local mousePos = Vector2.new(
 		    Mouse.X - inset.X,
