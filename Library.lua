@@ -172,7 +172,7 @@ function Library:MakeDraggable(Instance, Cutoff)
                 Mouse.Y - Instance.AbsolutePosition.Y
             );
 
-            if ObjPos.Y > (Cutoff or 40) then
+            if ObjPos.Y > (Cutoff or 0) then
                 return;
             end;
 
@@ -2971,7 +2971,7 @@ function Library:CreateWindow(...)
         Parent = ScreenGui;
     });
 
-    Library:MakeDraggable(Outer, 25);
+    Library:MakeDraggable(Outer, 0);
 
     local Inner = Library:Create('Frame', {
         BackgroundColor3 = Library.MainColor;
