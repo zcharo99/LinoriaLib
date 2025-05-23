@@ -4,6 +4,7 @@ local Teams = game:GetService('Teams');
 local Players = game:GetService('Players');
 local RunService = game:GetService('RunService')
 local TweenService = game:GetService('TweenService');
+local GuiService = game:GetService('GuiService');
 local RenderStepped = RunService.RenderStepped;
 local LocalPlayer = Players.LocalPlayer;
 local Mouse = LocalPlayer:GetMouse();
@@ -172,16 +173,22 @@ function Library:MakeDraggable(Instance, Cutoff)
                 Mouse.Y - Instance.AbsolutePosition.Y
             );
 
-            if ObjPos.Y > (Cutoff or 1) then
+            if ObjPos.Y > (Cutoff or 40) then
                 return;
             end;
 
+	    local inset = GuiService:GetGuiInset()
+	    local mousePos = Vector2.new(
+		Mouse.X - inset.X,
+		Mouse.Y - inset.Y
+	    )
+		
             while InputService:IsMouseButtonPressed(Enum.UserInputType.MouseButton1) do
                 Instance.Position = UDim2.new(
                     0,
-                    Mouse.X - ObjPos.X + (Instance.Size.X.Offset * Instance.AnchorPoint.X),
+                    mousePos.X - ObjPos.X + (Instance.Size.X.Offset * Instance.AnchorPoint.X),
                     0,
-                    Mouse.Y - ObjPos.Y + (Instance.Size.Y.Offset * Instance.AnchorPoint.Y)
+                    mousePos.Y - ObjPos.Y + (Instance.Size.Y.Offset * Instance.AnchorPoint.Y)
                 );
 
                 RenderStepped:Wait();
@@ -2971,7 +2978,7 @@ function Library:CreateWindow(...)
         Parent = ScreenGui;
     });
 
-    Library:MakeDraggable(Outer);
+    Library:MakeDraggable(Outer, 25);
 
     local Inner = Library:Create('Frame', {
         BackgroundColor3 = Library.MainColor;
