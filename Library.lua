@@ -164,38 +164,36 @@ function Library:CreateLabel(Properties, IsHud)
 end;
 
 function Library:MakeDraggable(Instance, Cutoff)
-    Instance.Active = true;
+	Instance.Active = true
 
-    Instance.InputBegan:Connect(function(Input)
-        if Input.UserInputType == Enum.UserInputType.MouseButton1 then
-            local ObjPos = Vector2.new(
-                Mouse.X - Instance.AbsolutePosition.X,
-                Mouse.Y - Instance.AbsolutePosition.Y
-            );
+	Instance.InputBegan:Connect(function(input)
+		if input.UserInputType == Enum.UserInputType.MouseButton1 then
+			local inset = GuiService:GetGuiInset()
+			local startMouse = InputService:GetMouseLocation() - inset
+			local startGuiPos = Instance.AbsolutePosition
+			local dragOffset = startMouse - Vector2.new(startGuiPos.X, startGuiPos.Y)
 
-            if ObjPos.Y > (Cutoff or 40) then
-                return;
-            end;
-		
-            while InputService:IsMouseButtonPressed(Enum.UserInputType.MouseButton1) do
-		local Mouse = InputService:GetMouseLocation()
-		local inset = GuiService:GetGuiInset()
-	    	local mousePos = Vector2.new(
-		    Mouse.X - inset.X,
-		    Mouse.Y - inset.Y
-	    	)
-                Instance.Position = UDim2.new(
-                    0,
-                    mousePos.X - ObjPos.X + (Instance.Size.X.Offset * Instance.AnchorPoint.X),
-                    0,
-                    mousePos.Y - ObjPos.Y + (Instance.Size.Y.Offset * Instance.AnchorPoint.Y)
-                );
+			if dragOffset.Y > (Cutoff or 40) then
+				return
+			end
 
-                RenderStepped:Wait();
-            end;
-        end;
-    end)
-end;
+			while InputService:IsMouseButtonPressed(Enum.UserInputType.MouseButton1) do
+				local inset = GuiService:GetGuiInset()
+				local mousePos = InputService:GetMouseLocation() - inset
+				local newPos = mousePos - dragOffset
+
+				Instance.Position = UDim2.new(
+					0,
+					newPos.X + (Instance.Size.X.Offset * Instance.AnchorPoint.X),
+					0,
+					newPos.Y + (Instance.Size.Y.Offset * Instance.AnchorPoint.Y)
+				)
+
+				RunService.RenderStepped:Wait()
+			end
+		end
+	end)
+end
 
 function Library:AddToolTip(InfoStr, HoverInstance)
     local X, Y = Library:GetTextBounds(InfoStr, Library.Font, 14);
