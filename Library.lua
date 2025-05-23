@@ -168,8 +168,8 @@ function Library:MakeDraggable(Instance, Cutoff)
     Instance.InputBegan:Connect(function(Input)
         if Input.UserInputType == Enum.UserInputType.MouseButton1 then
             local ObjPos = Vector2.new(
-                Mouse.X - Instance.AbsolutePosition.X,
-                Mouse.Y - Instance.AbsolutePosition.Y
+                Mouse.X + 40 - Instance.AbsolutePosition.X,
+                Mouse.Y + 40 - Instance.AbsolutePosition.Y
             );
 
             if ObjPos.Y > (Cutoff or 0) then
@@ -2971,7 +2971,7 @@ function Library:CreateWindow(...)
         Parent = ScreenGui;
     });
 
-    Library:MakeDraggable(Outer, 0);
+    Library:MakeDraggable(Outer);
 
     local Inner = Library:Create('Frame', {
         BackgroundColor3 = Library.MainColor;
