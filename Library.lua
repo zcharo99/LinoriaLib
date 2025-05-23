@@ -16,7 +16,7 @@ ProtectGui(ScreenGui);
 
 ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Global;
 ScreenGui.IgnoreGuiInset = true
-ScreenGui.Parent = CoreGui;
+ScreenGui.Parent = gethui();
 
 local zconn = ScreenGui.DescendantAdded:Connect(function(obj)
     for _, v in pairs(obj:GetDescendants()) do
