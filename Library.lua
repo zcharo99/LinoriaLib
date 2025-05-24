@@ -180,7 +180,7 @@ function Library:MakeDraggable(Instance, Cutoff)
 			while InputService:IsMouseButtonPressed(Enum.UserInputType.MouseButton1) do
 				local inset = GuiService:GetGuiInset()
 				local mousePos = InputService:GetMouseLocation() - inset
-				local newPos = mousePos - dragOffset + Vector2.new(0, 50)
+				local newPos = mousePos - dragOffset + Vector2.new(0, 55)
 
 				Instance.Position = UDim2.new(
 					0,
