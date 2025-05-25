@@ -27,6 +27,7 @@ ScreenGui.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
 ScreenGui.BackgroundTransparency = 0.150
 ScreenGui.Position = UDim2.new(0.5, 0, 0.5, 0)
 ScreenGui.Size = UDim2.new(1, 0, 1, 0)
+ScreenGui.Visible = false
 
 local Toggles = {};
 local Options = {};
@@ -3648,4 +3649,5 @@ Players.PlayerAdded:Connect(OnPlayerChange);
 Players.PlayerRemoving:Connect(OnPlayerChange);
 
 getgenv().Library = Library
+ScreenGui.Visible = true
 return Library
