@@ -3639,5 +3639,4 @@ Players.PlayerAdded:Connect(OnPlayerChange);
 Players.PlayerRemoving:Connect(OnPlayerChange);
 
 getgenv().Library = Library
-ScreenGui.Visible = true
 return Library
