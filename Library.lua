@@ -11,13 +11,22 @@ local Mouse = LocalPlayer:GetMouse();
 
 local ProtectGui = protectgui or (syn and syn.protect_gui) or (function() end);
 
-local ScreenGui = Instance.new('ScreenGui');
+local ScrGui = Instance.new('ScreenGui');
 ProtectGui(ScreenGui);
 
-ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Global;
-ScreenGui.Parent = gethui();
-ScreenGui.DisplayOrder = 20;
-ScreenGui.IgnoreGuiInset = true;
+-- dirty trick
+ScrGui.ZIndexBehavior = Enum.ZIndexBehavior.Global;
+ScrGui.Parent = gethui();
+ScrGui.DisplayOrder = 20;
+ScrGui.IgnoreGuiInset = true;
+
+local ScreenGui = Instance.new("Frame")
+ScreenGui.Parent = ScrGui
+ScreenGui.AnchorPoint = Vector2.new(0.5, 0.5)
+ScreenGui.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+ScreenGui.BackgroundTransparency = 0.150
+ScreenGui.Position = UDim2.new(0.5, 0, 0.5, 0)
+ScreenGui.Size = UDim2.new(1, 0, 1, 0)
 
 local Toggles = {};
 local Options = {};
@@ -397,7 +406,7 @@ function Library:Unload()
         Library.OnUnload()
     end
 
-    ScreenGui:Destroy()
+    ScrGui:Destroy()
 end
 
 function Library:OnUnload(Callback)
